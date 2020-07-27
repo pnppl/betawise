@@ -19,6 +19,8 @@ Using [Neo Manager](https://support.renaissance.com/techkb/techkb/13002475e.asp)
 * SmartApplets tab → select Debugging Tool → Add
 * Send List tab → Send
 
+On Windows 7 x64, Neo Manager stores custom applets in **%AppData%\Local\VirtualStore\Program Files (x86)\AlphaSmart\AlphaSmart Manager 2\SmartApplets**
+
 Usage
 -----
 * **B**, **W**, and **L** get and set bytes, words, and longs respectively (leave off second argument to get/peek)
