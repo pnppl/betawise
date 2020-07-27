@@ -21,10 +21,10 @@ Using [Neo Manager](https://support.renaissance.com/techkb/techkb/13002475e.asp)
 
 Usage
 -----
-**B**, **L**, and **W** get and set bytes, words, and longs respectively (leave off second argument to get/peek)
-**S** works the same but is for strings; start/end quotes are added automatically
-**R** displays command registers (accepts no arguments)
-**C** executes a system call
+* **B**, **W**, and **L** get and set bytes, words, and longs respectively (leave off second argument to get/peek)
+* **S** works the same as B/W/L but for strings; start/end quotes are added automatically
+* **R** displays command registers (accepts no arguments)
+* **C** executes a system call
 
 Type any of the above with no arguments for a syntax example.
 
