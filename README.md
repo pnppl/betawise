@@ -30,7 +30,8 @@ Usage
 
 Type any of the above with no arguments for a syntax example.
 
-Both **ctrl+C** and **escape** interrupt.
+* Both **ctrl+C** and **esc** interrupt
+* **clear file** clears screen.
 
 Work in Progress
 ----------------
