@@ -17,6 +17,7 @@ Installing
 Using [Neo Manager](https://support.renaissance.com/techkb/techkb/13002475e.asp):
 * File → Add to Applet List... → select DebugTool.OS3KApp
 * SmartApplets tab → select Debugging Tool → Add
+  * Optional: checking *Delete SmartApplets that are not in the Install List…* saves you a keypress or two during debug (**will delete existing applets**)
 * Send List tab → Send
 
 On Windows 7 x64, Neo Manager stores custom applets in **%AppData%\Local\VirtualStore\Program Files (x86)\AlphaSmart\AlphaSmart Manager 2\SmartApplets**
