@@ -33,6 +33,10 @@ Type any of the above with no arguments for a syntax example.
 * Both **ctrl+C** and **esc** interrupt
 * **clear file** clears screen
 
+Tips
+----
+Key combo to reset to factory defaults is right shift + backspace + on; passsword is "tommy"
+
 Work in Progress
 ----------------
 Much research and work is still needed:
