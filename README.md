@@ -26,7 +26,7 @@ Usage
 * **B**, **W**, and **L** get and set bytes, words, and longs respectively (leave off second argument to get/peek)
 * **S** works the same as B/W/L but for strings; start/end quotes are added automatically
 * **R** displays command registers (accepts no arguments)
-* **C** executes a system call
+* **C** calls a method
 
 Type any of the above with no arguments for a syntax example.
 
