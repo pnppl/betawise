@@ -12,7 +12,7 @@ APPLET_HEADER_BEGIN
     APPLET_ID(0xA1DE)
     APPLET_NAME("Debugging Tool")
     APPLET_INFO("Copyright (c) 2020 Alpaxo Software")
-    APPLET_VERSION(0, 0, 1)
+    APPLET_VERSION(0, 0, 2)
     APPLET_LANGUAGE_EN_US
 APPLET_HEADER_END
 
@@ -25,6 +25,10 @@ void new_line() {
     printf("$ ");
 }
 
+void backspace() {
+	//if(gd->args
+}
+
 void command_call() {
     if(gd->n < 1) {
         puts("");
@@ -33,8 +37,8 @@ void command_call() {
     }
     puts(" OK");
     unsigned pFunc = gd->args[0];
-    if(pFunc >= 0xA000 && pFunc <= 0xA400 && !(pFunc & 3)) {
-        pFunc = (unsigned)&ClearScreen + ((pFunc - 0xA000) >> 1);
+    if(pFunc >= 0xA000 && pFunc <= 0xA400 && !(pFunc & 3)) { // bitwise op checks last nibble is divisible by 4
+        pFunc = (unsigned)&ClearScreen + ((pFunc - 0xA000) >> 1); // address translation for ROM
     }
     switch(gd->n) {
         case 0:
@@ -152,6 +156,7 @@ void command_string() {
 }
 
 void ProcessMessage(uint32_t message, uint32_t param, uint32_t* status) {
+
     char key, row, col;
     *status = 0;
     switch(message) {
@@ -164,9 +169,16 @@ void ProcessMessage(uint32_t message, uint32_t param, uint32_t* status) {
             new_line();
             break;
 
-        case MSG_CHAR:
-            key = toupper(param);
-            if(!gd->pCommand) {
+        case MSG_CHAR: // ascii key pressed
+            key = toupper(param); // param is ascii code of key pushed, eg 41 = A
+            if(!gd->pCommand) { // gd->pCommand == 0
+				
+				// print param
+				GetCursorPos(&row, &col);
+				SetCursor(1, 34, 0x0F);
+				printf("  [%2X]", param);
+				SetCursor(row, col, 0x0F);
+				
                 switch(key) {
                     case 'C':
                         gd->pCommand = &command_call;
@@ -189,13 +201,9 @@ void ProcessMessage(uint32_t message, uint32_t param, uint32_t* status) {
                     case '\r':
                         puts("");
                         new_line();
-                        break;
-                    default:
-                        GetCursorPos(&row, &col);
-                        SetCursor(1, 34, 0x0F);
-                        printf("  [%2X]", param);
-                        SetCursor(row, col, 0x0F);
                         return;
+                    default:
+                        return; 
                 }
                 putchar(key);
             } else if(key == '\r') {
@@ -228,13 +236,17 @@ void ProcessMessage(uint32_t message, uint32_t param, uint32_t* status) {
                 gd->n = 4;
             }
             break;
-        case MSG_KEY:
+        case MSG_KEY: // non-ascii key pressed
             switch(param) {
                 case KEY_CLEAR_FILE:
                     ClearScreen();
                     SetCursor(1, 1, 0x0F);
                     new_line();
                     break;
+                
+                case KEY_BACKSPACE:
+					backspace();
+					break;
 
                 case KEY_ESC:
                 case MOD_CTRL | KEY_C:
@@ -243,10 +255,10 @@ void ProcessMessage(uint32_t message, uint32_t param, uint32_t* status) {
                     break;
 
                 default:
-                    GetCursorPos(&row, &col);
-                    SetCursor(1, 34, 0x0F);
-                    printf("{%4X}", param);
-                    SetCursor(row, col, 0x0F);
+					GetCursorPos(&row, &col);
+					SetCursor(1, 34, 0x0F);
+					printf("{%4X}", param);
+					SetCursor(row, col, 0x0F);
                     break;
                 }
             break;
