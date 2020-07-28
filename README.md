@@ -31,7 +31,7 @@ Usage
 Type any of the above with no arguments for a syntax example.
 
 * Both **ctrl+C** and **esc** interrupt
-* **clear file** clears screen.
+* **clear file** clears screen
 
 Work in Progress
 ----------------
